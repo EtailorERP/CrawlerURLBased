@@ -1,5 +1,5 @@
 var pageOpener = require('./../pageOpener.js');
-
+var jsonParser = require('./../jsonParser.js')
 
 var forSearching = {
 		'form' : true,	
@@ -18,7 +18,37 @@ var forGettingPrice = {
 		'priceTagId2' : 'priceblock_ourprice'
 }
 
-function startOnAmazon(page,amazonUrl){
+var forGettingUserRating = {
+	'ratingBlockId' : 'revSum',
+	'listOfRatings' : 'tr',
+	'ratingDivClass' : 'a-nowrap',
+	'indexForRatingDiv' : 1,
+	'tagToFetch' : 'a'
+		
+}
+
+var forGettingProductImage = {
+	'mainBlockId' : 'product-slider',
+	'tagsName' : 'img'
+}
+
+var forGettingProductName = {
+	'titleId' : 'productTitle'
+}
+
+var forGettingProductDescription = {
+	'mainDivId' : 'productDescription',
+	'contentClass' : 'productDescriptionWrapper',
+	'contentIndex' : 0
+}
+
+var forGettingSellerName = {
+		'mainBlockId' : 'merchant-info',
+		'tagsName' : 'a',
+		'tagsNameIndex' : 0
+}
+
+function startOnAmazon(page,amazonUrl,cb){
 	var done =false;
 	console.log('Amazon Started');
 	page.open(amazonUrl);
@@ -27,9 +57,24 @@ function startOnAmazon(page,amazonUrl){
 			console.log('========================================'+status);
 			page.render('./downloaded/amazonItem.png');
 
-			var finalP = pageOpener.amazon.forGettingPrice(page);
-			console.log('","actual" : "price on amazon : '+finalP+'"}');
-			phantom.exit();
+			var price,userRating,name,description;
+			price = pageOpener.amazon.forGettingPrice(page);
+			userRating = pageOpener.amazon.forGettingUserRatings(page);
+			name = pageOpener.amazon.forGettingProductName(page);
+			description = pageOpener.amazon.forGettingProductDescription(page);
+			var seller = pageOpener.amazon.forGettingSellerName(page);
+			
+			var jsonResponse = {
+					'name' : name ,
+					'price' : price,
+					'rating' : userRating,
+					'description' : description,
+					'seller' : seller,
+					'lineGraph' : true
+			}
+			
+			jsonResponse = jsonParser.jsonToString(jsonResponse);
+			cb(jsonResponse);
 
 		}
 		done = true;
@@ -40,7 +85,7 @@ function startOnAmazon(page,amazonUrl){
 		var list = requestData.url.split(".");
 		var len = list.length;
 		var str = list[len-1];
-		if(str.length == 3 && (str=='jpg' || str=='gif' || str=='png')){
+		if(str.length == 3 && (str=='jpg' || str=='png' || str=='gif')){
 			networkRequest.abort();
 		}
 	};
@@ -50,3 +95,8 @@ exports.startOnAmazon = startOnAmazon;
 exports.forSearching = forSearching;
 exports.forGettingItemFromList = forGettingItemFromList;
 exports.forGettingPrice = forGettingPrice;
+exports.forGettingUserRating = forGettingUserRating;
+exports.forGettingProductImage = forGettingProductImage;
+exports.forGettingProductDescription = forGettingProductDescription;
+exports.forGettingProductName = forGettingProductName;
+exports.forGettingSellerName = forGettingSellerName;

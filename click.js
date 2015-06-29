@@ -17,13 +17,16 @@ phantom.onError = function(msg, trace) {
 }
 
 
-var urls = [];
-args.forEach(function(arg, i) {
-	 urls[i] = arg;
-});
+//var urls = [];
+//args.forEach(function(arg, i) {
+//	 urls[i] = arg;
+//});
 
-var MARKET_PLACE = urls[1];
-var URL = urls[2];
+//var MARKET_PLACE = urls[1];
+//var URL = urls[2];
+
+var MARKET_PLACE = 'PAYTM';
+var URL ='https://paytm.com/shop/p/micromax-aq5001-canvas-juice-2-silver-MOBMICROMAX-AQ5SHOP245619C3FBD31';
 console.log('url REACHED IN SCRIPT'+URL);
 
 
@@ -32,31 +35,38 @@ var snapdealService = require('./services/snapdeal/snapdeal.js');
 var flipkartService = require('./services/flipkart/flipkart.js');
 var paytmService = require('./services/paytm/paytm.js');
 
+var cb = function(response){
+//	var eTime = new Date();
+//	console.log(eTime-stime);
+	console.log('","actual" : '+response+'}');			
+	phantom.exit(0);
+}
+
 function searchItemOnMP(mp){
 	switch(mp){
 		case 'AMAZON' :
 		{
 			
 			var page = require('webpage').create();
-			amazonService.startOnAmazon(page,URL);	
+			amazonService.startOnAmazon(page,URL,cb);	
 		}
 		break;
 		case 'SD':
 		{
 			var page = require('webpage').create();
-			snapdealService.startOnSnapdeal(page,URL);	
+			snapdealService.startOnSnapdeal(page,URL,cb);	
 		}
 		break;
 		case 'FK':
 		{
 			var page = require('webpage').create();
-			flipkartService.startOnFlipkart(page,URL);	
+			flipkartService.startOnFlipkart(page,URL,cb);	
 		}
 		break;
 		case 'PAYTM':
 		{
 			var page = require('webpage').create();
-			paytmService.startOnPaytm(page,URL);	
+			paytmService.startOnPaytm(page,URL,cb);	
 		}
 		break;
 	}

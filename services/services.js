@@ -46,9 +46,4 @@ function checkNumber(c)
 }
 
 
-function jsonToString(jsonObject){
-	return JSON.stringify(jsonObject);
-}
-
-
 exports.getNumbersFromString = getNumbersFromString;
