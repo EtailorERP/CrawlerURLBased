@@ -1,0 +1,35 @@
+<html ng-app="priceFetcher">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src = "scripts/controller/main.js"></script>
+<script src = "scripts/services/ajax.js"></script>
+<script src = "scripts/services/parser.js"></script>
+<link rel="stylesheet" type="text/css" href="styles/main.css">
+
+<body>
+<div ng-controller="mainController">
+
+	<div class="formcontainer">
+							<form >
+								<input type="text" size="40" placeholder="Amazon Item Url" ng-model="amazonUrl" ng-blur="getDetailAmazon()" >
+								<img class="loader-img loaderImage"  ng-if="amazonWait == 1" src="images/loader.GIF" />
+								<label ng-if="amazonWait == 0" ng-model="amazonPrice">{{amazonPrice}}</label><br />
+								
+								<input type="text" size="40" placeholder="Snapdeal Item Url" ng-model="snapdealUrl" ng-blur="getDetailAmazon()" >
+								<img class="loader-img loaderImage" ng-if="snapdealWait == 1" src="images/loader.GIF" />
+								<label ng-if="snapdealWait == 0" ng-model="snapdealPrice">{{snapdealPrice}}</label><br />
+								
+								<input type="text" size="40" placeholder="Flipkart Item Url" ng-model="flipkartUrl" ng-blur="getDetailAmazon()" >
+								<img class="loader-img loaderImage" ng-if="flipkartWait == 1" src="images/loader.GIF" />
+								<label ng-if="flipkartWait == 0" ng-model="flipkartPrice">{{flipkartPrice}}</label><br />
+								
+								<input type="text" size="40" placeholder="Paytm Item Url" ng-model="paytmUrl" ng-blur="getDetailAmazon()" >
+								<img class="loader-img loaderImage" ng-if="paytmWait == 1" src="images/loader.GIF" />
+								<label ng-if="paytmWait == 0" ng-model="paytmPrice">{{paytmPrice}}</label><br />
+								
+								<input  type="button" ng-click="fetchAmazon();fetchFlipkart();fetchPaytm();fetchSnapdeal();" value="Find">
+							</form>
+	</div>
+
+</div>
+</body>
+</html>
