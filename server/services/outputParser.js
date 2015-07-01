@@ -1,7 +1,6 @@
 function outputFromScriptParser(data){
 	
-	var temp = data.output;
-	console.log(data.output);
+	var temp = data;
 	temp = temp.replace(/\r?\n|\r/g,"");
 	var out = JSON.parse(temp);
 	
