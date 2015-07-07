@@ -14,9 +14,9 @@ var forGettingItemFromList = {
 }
 
 var forGettingPrice = {
-		'priceTagId1' : 'selling-price-id'
+		'priceTagClass' : 'payBlkBig',
+		'priceIndex' : 0
 }
-
 
 var forGettingUserRating = {
 		'userRatingBlockId' : 'ratingOverReview',
@@ -30,23 +30,26 @@ var forGettingProductImage = {
 }
 
 var forGettingProductName = {
-		'mainBlockClass' : 'pdpName',
+		'mainBlockClass' : 'product-detail',
 		'mainBlockIndex' : 0,
-		'tagsName' : 'h1',
-		'tagsNameIndex' : 0
+		'productNameClass' : 'pdp-e-i-head',
+		'productNameIndex' : 0
 }
 
 var forGettingProductDescription = {
-		'mainBlockClass' : 'details-content',
-		'mainBlockClassIndex' : 0,
-		'detailDivClass' : 'MsoNormal',
-		'detailDivIndex' : 1,
-		'tagsName' : 'span',
-		'tagsNameIndex' : 0
+//		'mainBlockClass' : 'details-content',
+//		'mainBlockClassIndex' : 0,
+//		'detailDivClass' : 'MsoNormal',
+//		'detailDivIndex' : 1,
+//		'tagsName' : 'span',
+//		'tagsNameIndex' : 0
+		'mainBlockClass' : 'detailssubbox',
+		'mainBlockIndex' : 0
 }
 
 var forGettingSellerName = {
-		'mainBlockId' : 'vendorName'
+		'mainBlockClass' : 'pdp-e-seller-info-name',
+		'mainBlockIndex' : 0
 }
 
 function startOnSnapdeal(page,snapdealUrl,cb){
@@ -72,7 +75,7 @@ function startOnSnapdeal(page,snapdealUrl,cb){
 
 			var price,userRating,productName,productDescription,seller;
 			price = pageOpener.snapdeal.forGettingPrice(page);
-			userRating = pageOpener.snapdeal.forGettingUserRating(page);
+//			userRating = pageOpener.snapdeal.forGettingUserRating(page);
 			productName = pageOpener.snapdeal.forGettingProductName(page);
 			productDescription = pageOpener.snapdeal.forGettingProductDescription(page);
 			seller = pageOpener.snapdeal.forGettingSellerName(page);
@@ -81,7 +84,7 @@ function startOnSnapdeal(page,snapdealUrl,cb){
 			var jsonResponse = {
 					'name' : productName,
 					'price' : price,
-					'rating' : userRating,
+//					'rating' : userRating,
 					'description' : productDescription,
 					'seller' : seller,
 					'lineGraph' : false

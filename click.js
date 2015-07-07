@@ -17,18 +17,18 @@ phantom.onError = function(msg, trace) {
 }
 
 
-//var urls = [];
-//args.forEach(function(arg, i) {
-//	 urls[i] = arg;
-//});
+var urls = [];
+args.forEach(function(arg, i) {
+	 urls[i] = arg;
+});
+//
+var MARKET_PLACE = urls[1];
+var URL = urls[2];
 
-//var MARKET_PLACE = urls[1];
-//var URL = urls[2];
-
-var MARKET_PLACE = 'PAYTM';
-var URL ='https://paytm.com/shop/p/micromax-aq5001-canvas-juice-2-silver-MOBMICROMAX-AQ5SHOP245619C3FBD31';
-console.log('url REACHED IN SCRIPT'+URL);
-
+// var MARKET_PLACE = 'SD';
+// var URL ='http://www.snapdeal.com/product/sandisk-cruzer-blade-16gb-pen/28914';
+// console.log('url REACHED IN SCRIPT'+URL);
+//
 
 var amazonService = require('./services/amazon/amazon.js');
 var snapdealService = require('./services/snapdeal/snapdeal.js');
