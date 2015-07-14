@@ -11,5 +11,5 @@ PhantomJS based crawling mechanism. It fetches product name, price, product desc
 
 ## example
 
-put the following url in amazon field box
+put the following url in amazon field box and test the application ------
 'http://www.amazon.in/gp/product/B00PWDSA1G/ref=s9_simh_gw_p147_d0_i1?pf_rd_m=A1VBAL9TL5WCBF&pf_rd_s=desktop-1&pf_rd_r=1EZFQ4K7Z7FFNN4QTDG6&pf_rd_t=36701&pf_rd_p=577130167&pf_rd_i=desktop'
